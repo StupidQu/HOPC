@@ -69,7 +69,7 @@ void Widget::updateProblemDetail() {
         this->ui->choicesListWidget->addItem(choice);
     }
     this->ui->correctAnswerLineEdit->setText(problem.correctChoice);
-    this->ui->scoreSpinBox->setValue(problem.score);
+    this->ui->scoreDoubleSpinBox->setValue(problem.score);
     this->ui->deleteProblemPushButton->setEnabled(true);
     this->ui->saveProblemPushButton->setEnabled(true);
     this->ui->addChoicePushButton->setEnabled(true);
@@ -108,7 +108,7 @@ Problem::Problem() {
     this->choices = QList<QString>();
     this->choices << "选项 A 描述" << "选项 B 描述" << "选项 C 描述" << "选项 D 描述";
     this->correctChoice = "A";
-    this->score = 2;
+    this->score = 2.0;
 }
 
 Problem::Problem(const QJsonObject &obj) {
@@ -118,10 +118,10 @@ Problem::Problem(const QJsonObject &obj) {
         this->choices.append(choice.toString());
     }
     this->correctChoice = obj["correctChoice"].toString();
-    this->score = obj["score"].toInt();
+    this->score = obj["score"].toDouble();
 }
 
-void Problem::editProblem(const QString &_statement, const QList<QString> &_choices, const QString &_correctChoice, int _score) {
+void Problem::editProblem(const QString &_statement, const QList<QString> &_choices, const QString &_correctChoice, double _score) {
     this->statement = _statement;
     this->choices = _choices;
     this->correctChoice = _correctChoice;
@@ -220,7 +220,7 @@ void Widget::on_saveProblemPushButton_clicked() {
     for (int i = 0; i < this->ui->choicesListWidget->count(); i++) {
         choices.append(this->ui->choicesListWidget->item(i)->text());
     }
-    this->getCurrentProblem().editProblem(this->ui->statementTextEdit->toPlainText(), choices, this->ui->correctAnswerLineEdit->text(), this->ui->scoreSpinBox->value());
+    this->getCurrentProblem().editProblem(this->ui->statementTextEdit->toPlainText(), choices, this->ui->correctAnswerLineEdit->text(), this->ui->scoreDoubleSpinBox->value());
     this->getCurrentExam().save();
     this->setStatus("就绪");
     this->updateProblemDetail();

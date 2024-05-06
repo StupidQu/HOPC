@@ -9,11 +9,11 @@ public:
     QString statement;
     QList<QString> choices;
     QString correctChoice;
-    int score;
+    double score;
 
     Problem();
     explicit Problem(const QJsonObject &obj);
-    void editProblem(const QString &_statement, const QList<QString> &_choices, const QString &_correctChoice, int _score);
+    void editProblem(const QString &_statement, const QList<QString> &_choices, const QString &_correctChoice, double _score);
     [[nodiscard]] QJsonObject toJsonObject() const;
 };
 

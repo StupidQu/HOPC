@@ -187,7 +187,17 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="scoreSpinBox"/>
+            <widget class="QDoubleSpinBox" name="scoreDoubleSpinBox">
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="singleStep">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item>
             <spacer name="horizontalSpacer_2">
